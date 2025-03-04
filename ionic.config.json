@@ -1,0 +1,7 @@
+{
+  "name": "srm-usc-app",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue-vite"
+}
