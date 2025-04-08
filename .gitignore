@@ -30,3 +30,4 @@ yarn-error.log*
 
 # Optional eslint cache
 .eslintcache
+src/pages/Login.tsx
