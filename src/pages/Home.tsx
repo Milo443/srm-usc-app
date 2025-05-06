@@ -3,7 +3,7 @@ import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonItem, IonLabel
 import {settings } from 'ionicons/icons';
 import EstablishmentListComponent from '../components/EstablishmentListComponent';
 import { Establishment } from '../types/establishment';
-import { getFirestore, collection, getDocs } from 'firebase/firestore';  //Importacion de librerias necesarias
+import { getFirestore, collection, getDocs } from 'firebase/firestore';  //Importacion de librerias necesarias para la ejecución del aplicativo
   
 
 const Home: React.FC = () => {
