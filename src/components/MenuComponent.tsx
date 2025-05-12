@@ -3,7 +3,7 @@ import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonImg, IonChip, 
 import { getFirestore, collection, query, where, getDocs } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 
-interface MenuItem {
+export interface MenuItem {
   id: string;
   name: string;
   description: string;
@@ -21,9 +21,10 @@ interface MenuCategory {
 
 interface Props {
   categories: MenuCategory[];
+  onAddToCart: (item: MenuItem) => void;
 }
 
-const MenuComponent: React.FC<Props> = ({ categories }) => {
+const MenuComponent: React.FC<Props> = ({ categories, onAddToCart }) => {
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -109,7 +110,7 @@ const MenuComponent: React.FC<Props> = ({ categories }) => {
                       <IonImg 
                         src={item.image} 
                         alt={item.name}
-                        style={{ width: '70px', height: '70px', objectFit: 'cover', borderRadius: '8px' }}
+                        style={{ width: '70px', height: '70px', objectFit: 'cover', borderRadius: '8px', paddingRight: '10px' }}
                       />
                     </IonCol>
                     
@@ -128,7 +129,7 @@ const MenuComponent: React.FC<Props> = ({ categories }) => {
                     
                     <IonCol size="3" sizeSm="2" className="ion-text-end">
                       {item.available !== false && (
-                        <IonButton size="small">
+                        <IonButton size="small" onClick={() => onAddToCart(item)}>
                           Agregar
                         </IonButton>
                       )}

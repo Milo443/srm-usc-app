@@ -1,6 +1,17 @@
+import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
-import { IonApp, IonRouterOutlet, setupIonicReact } from '@ionic/react';
+import {
+  IonApp,
+  IonIcon,
+  IonLabel,
+  IonRouterOutlet,
+  IonTabBar,
+  IonTabButton,
+  IonTabs,
+  setupIonicReact
+} from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
+import { home, list, person } from 'ionicons/icons';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { useEffect, useState } from 'react';
 
@@ -39,6 +50,10 @@ import TabsLayout from './components/TabsLayout';
 import EstablishmentDetail from './pages/EstablishmentDetail';
 import TabsLayoutEstablishmnet from './components/establishmnetComponent/TabsLayoutEstablishmnet';
 import HomeEstablishmnet from './pages/Establishment/HomeEstablishmnet';
+import Home from './pages/Home';
+import Orders from './pages/Orders';
+import OrderDetail from './pages/OrderDetail';
+import ScreenSplash from './pages/ScreenSplash';
 
 setupIonicReact();
 
@@ -79,8 +94,7 @@ const PrivateRoute: React.FC<{
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
-      <IonRouterOutlet>
-        <Route exact path="/login" component={Login} />
+    <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
         <PrivateRoute path="/app" component={TabsLayout} />
         <Route exact path="/">
@@ -88,7 +102,8 @@ const App: React.FC = () => (
         </Route>
         <Route exact path="/establishment/:id" component={EstablishmentDetail} />
         <PrivateRoute path="/app/establishment" component={TabsLayoutEstablishmnet} />
-      </IonRouterOutlet>
+
+
     </IonReactRouter>
   </IonApp>
 );

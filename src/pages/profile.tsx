@@ -174,7 +174,7 @@ const Profile: React.FC = () => {
             <IonItem>
               <IonLabel>
                 <h2>Rol</h2>
-                <IonText>{userData.role === 'common' ? 'Usuario' : 'Establecimiento'}</IonText>
+                <IonText>{userData.role === 'admin' ? 'Establecimiento' : 'Usuario'}</IonText>
               </IonLabel>
             </IonItem>
           </IonList>

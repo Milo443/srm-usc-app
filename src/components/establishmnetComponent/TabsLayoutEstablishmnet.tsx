@@ -7,6 +7,8 @@ import HomeEstablishmnet from '../../pages/Establishment/HomeEstablishmnet';
 
 import Profile from '../../pages/common/profile';
 import Menu from '../../pages/Establishment/Menu';
+import OrdersEstablishment from '../../pages/Establishment/OrdersEstablishment';
+
 
 // Páginas
 
@@ -25,7 +27,7 @@ const TabsLayoutEstablishmnet: React.FC = () => {
         </Route>
 
         <Route exact path="/app/establishment/orders">
-          {/* <Orders /> */}
+          <OrdersEstablishment />
         </Route>
 
         <Route exact path="/app/establishment/reports">
