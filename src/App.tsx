@@ -33,11 +33,12 @@ import '@ionic/react/css/palettes/dark.system.css';
 
 /* Theme variables */
 import './theme/variables.css';
-import ScreenSplash from './pages/ScreenSplash';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import TabsLayout from './components/TabsLayout';
 import EstablishmentDetail from './pages/EstablishmentDetail';
+import TabsLayoutEstablishmnet from './components/establishmnetComponent/TabsLayoutEstablishmnet';
+import HomeEstablishmnet from './pages/Establishment/HomeEstablishmnet';
 
 setupIonicReact();
 
@@ -86,6 +87,7 @@ const App: React.FC = () => (
           <Redirect to="/app" />
         </Route>
         <Route exact path="/establishment/:id" component={EstablishmentDetail} />
+        <PrivateRoute path="/app/establishment" component={TabsLayoutEstablishmnet} />
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>

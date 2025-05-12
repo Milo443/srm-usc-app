@@ -5,7 +5,7 @@ import { home, person, calendar, restaurant, cube } from 'ionicons/icons';
 
 // Páginas
 import Home from '../pages/Home';
-import Profile from '../pages/profile';
+import Profile from '../pages/common/profile';
 import Orders from '../pages/Orders';
 const TabsLayout: React.FC = () => {
   return (

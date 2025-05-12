@@ -73,7 +73,7 @@ const EstablishmentDetail: React.FC = () => {
       <IonHeader>
         <IonToolbar>
           <IonButtons slot="start">
-            <IonBackButton defaultHref="/home" />
+            <IonBackButton defaultHref="/app/home" />
           </IonButtons>
           <IonTitle>{establishment.name}</IonTitle>
         </IonToolbar>

@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonItem, IonLabel, IonInput, IonButton, IonToast, IonRow, IonCol, IonImg, IonInputPasswordToggle, IonCheckbox } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonItem, IonLabel, IonInput, IonButton, IonToast, IonRow, IonCol, IonImg, IonInputPasswordToggle, IonCheckbox, IonRouterLink } from '@ionic/react';
 import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
+import { getFirestore, doc, getDoc } from 'firebase/firestore';
 import { useHistory, Link } from 'react-router-dom';
 
 const Login: React.FC = () => {
@@ -11,6 +12,7 @@ const Login: React.FC = () => {
   const [toastMessage, setToastMessage] = useState('');
   const history = useHistory();
   const auth = getAuth();
+  const db = getFirestore();
 
   // Verificar sesión al cargar el componente
   useEffect(() => {
@@ -19,8 +21,12 @@ const Login: React.FC = () => {
         // Verificar si hay datos guardados
         const savedUserData = localStorage.getItem('userData') || sessionStorage.getItem('userData');
         if (savedUserData) {
-          console.log('Sesión activa encontrada');
-          history.push('/app');
+          const userData = JSON.parse(savedUserData);
+          if(userData.role === 'establecimiento'){
+            history.push('/app/establishment/');
+          }else{
+            history.push('/app');
+          }
         }
       }
     });
@@ -35,21 +41,39 @@ const Login: React.FC = () => {
       const user = userCredential.user;
       const token = await user.getIdToken();
 
+      // Obtener el rol del usuario desde Firestore
+      const userDocRef = doc(db, 'users', user.uid);
+      const userDoc = await getDoc(userDocRef);
+      
+      if (!userDoc.exists()) {
+        throw new Error('No se encontró la información del usuario');
+      }
+
+      const userData = userDoc.data();
+      const userRole = userData.role;
+
       // Guardar datos en el almacenamiento seleccionado
       const storage = rememberMe ? localStorage : sessionStorage;
-      const userData = {
+      const userDataToStore = {
         email: user.email,
         uid: user.uid,
         token,
         rememberMe,
+        role: userRole,
         lastLogin: new Date().toISOString()
       };
 
-      storage.setItem('userData', JSON.stringify(userData));
+      storage.setItem('userData', JSON.stringify(userDataToStore));
       storage.setItem('token', token);
 
       console.log('Inicio de sesión exitoso');
-      history.push('/app');
+      
+      // Redirigir según el rol
+      if (userRole === 'establecimiento') {
+        history.push('/app/establishment/home');
+      } else {
+        history.push('/app');
+      }
     } catch (error: any) {
       let errorMessage = 'Error en el inicio de sesión';
       
@@ -123,7 +147,9 @@ const Login: React.FC = () => {
         </form>
 
         <IonButton className="ion-margin-top" fill="outline" expand="block">
-          <Link to="/register" style={{textDecoration: 'none', color:'inherit'}}>Crear cuenta</Link>
+          <IonRouterLink routerLink="/register">
+            ¿No tienes cuenta? Regístrate
+          </IonRouterLink>
         </IonButton>
 
         <IonToast
