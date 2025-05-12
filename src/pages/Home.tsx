@@ -3,11 +3,11 @@ import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonItem, IonLabel
 import {settings } from 'ionicons/icons';
 import EstablishmentListComponent from '../components/EstablishmentListComponent';
 import { Establishment } from '../types/establishment';
-import { getFirestore, collection, getDocs } from 'firebase/firestore';
+import { getFirestore, collection, getDocs } from 'firebase/firestore';  //Importacion de librerias necesarias para la ejecución del aplicativo
+  
 
-
-const Home: React.FC = () => {
-  const [searchQuery, setSearchQuery] = useState('');
+const Home: React.FC = () => {        
+  const [searchQuery, setSearchQuery] = useState('');   //Creamos una variable de estado llamada searchQuery para almacenar texto
   const [establishments, setEstablishments] = useState<Establishment[]>([]);
 
   useEffect(() => {
