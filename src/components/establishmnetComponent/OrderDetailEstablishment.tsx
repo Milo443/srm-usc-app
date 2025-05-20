@@ -61,11 +61,23 @@ const OrderDetailEstablishment: React.FC<OrderDetailProps> = ({
             ))}
             <IonItem>
               <IonLabel>
-                <h2>Total</h2>
+                <h2>Fecha de creación</h2>
+                <p>{formatDate(order.createdAt)}</p>
               </IonLabel>
-              <IonText slot="end" color="primary">
-                <strong>${calculateTotal(order.items).toFixed(2)}</strong>
-              </IonText>
+            </IonItem>
+
+            <IonItem>
+              <IonLabel>
+                <h2>Método de pago</h2>
+                <p>{order.paymentMethod === 'efectivo' ? 'Efectivo' : 'Tarjeta de Crédito/Débito'}</p>
+              </IonLabel>
+            </IonItem>
+
+            <IonItem>
+              <IonLabel>
+                <h2>Total</h2>
+                <p>${order.totalAmount.toFixed(2)}</p>
+              </IonLabel>
             </IonItem>
           </IonList>
 

@@ -4,7 +4,7 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "io.ionic.starter.test",
+  "applicationId": "com.myapp.app.test",
   "variantName": "debugAndroidTest",
   "elements": [
     {
@@ -16,5 +16,6 @@
       "outputFile": "app-debug-androidTest.apk"
     }
   ],
-  "elementType": "File"
+  "elementType": "File",
+  "minSdkVersionForDexing": 23
 }

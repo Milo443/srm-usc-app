@@ -71,6 +71,8 @@ const Login: React.FC = () => {
       // Redirigir según el rol
       if (userRole === 'establecimiento') {
         history.push('/app/establishment/home');
+      } else if (userRole === 'admin') {
+        history.push('/admin');
       } else {
         history.push('/app');
       }

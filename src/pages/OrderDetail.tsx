@@ -169,6 +169,40 @@ const OrderDetail: React.FC = () => {
           </IonCardHeader>
           
           <IonCardContent>
+            <IonList>
+              <IonItem>
+                <IonLabel>
+                  <h2>Estado</h2>
+                  <p>
+                    <IonBadge color={getStatusColor(order.status)}>
+                      {getStatusText(order.status)}
+                    </IonBadge>
+                  </p>
+                </IonLabel>
+              </IonItem>
+
+              <IonItem>
+                <IonLabel>
+                  <h2>Fecha de creación</h2>
+                  <p>{formatDate(order.createdAt)}</p>
+                </IonLabel>
+              </IonItem>
+
+              <IonItem>
+                <IonLabel>
+                  <h2>Método de pago</h2>
+                  <p>{order.paymentMethod === 'efectivo' ? 'Efectivo' : 'Tarjeta de Crédito/Débito'}</p>
+                </IonLabel>
+              </IonItem>
+
+              <IonItem>
+                <IonLabel>
+                  <h2>Establecimiento</h2>
+                  <p>{order.establishmentName}</p>
+                </IonLabel>
+              </IonItem>
+            </IonList>
+            
             <div style={{ marginBottom: '16px' }}>
               <h3 style={{ display: 'flex', alignItems: 'center' }}>
                 <IonIcon icon={storefront} style={{ marginRight: '8px' }} />

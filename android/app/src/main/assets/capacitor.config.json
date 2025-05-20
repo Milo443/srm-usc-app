@@ -1,5 +1,9 @@
 {
-	"appId": "io.ionic.starter",
-	"appName": "reserva-app",
-	"webDir": "dist"
+	"appId": "com.myapp.app",
+	"appName": "MyApp",
+	"webDir": "dist",
+	"plugins": {},
+	"server": {
+		"androidScheme": "https"
+	}
 }

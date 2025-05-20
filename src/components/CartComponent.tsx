@@ -1,6 +1,6 @@
-import React from 'react';
-import { IonButton, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonIcon, IonItem, IonLabel, IonList, IonBadge, IonText, IonGrid, IonRow, IonCol } from '@ionic/react';
-import { cartOutline, add, remove, trashOutline } from 'ionicons/icons';
+import React, { useState } from 'react';
+import { IonButton, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonIcon, IonItem, IonLabel, IonList, IonBadge, IonText, IonGrid, IonRow, IonCol, IonRadioGroup, IonRadio, IonListHeader } from '@ionic/react';
+import { cartOutline, add, remove, trashOutline, cardOutline, cashOutline } from 'ionicons/icons';
 
 export interface CartItem {
   id: string;
@@ -17,7 +17,7 @@ interface CartProps {
   onIncreaseQuantity: (itemId: string) => void;
   onDecreaseQuantity: (itemId: string) => void;
   onRemoveItem: (itemId: string) => void;
-  onStartOrder: () => void;
+  onStartOrder: (paymentMethod: string) => void;
 }
 
 const CartComponent: React.FC<CartProps> = ({
@@ -29,6 +29,7 @@ const CartComponent: React.FC<CartProps> = ({
   onRemoveItem,
   onStartOrder
 }) => {
+  const [paymentMethod, setPaymentMethod] = useState<string>('efectivo');
   const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
   const totalPrice = items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 
@@ -91,13 +92,31 @@ const CartComponent: React.FC<CartProps> = ({
             </IonItem>
           ))}
         </IonList>
+
+        <IonList>
+          <IonListHeader>
+            <IonLabel>Método de Pago</IonLabel>
+          </IonListHeader>
+          <IonRadioGroup value={paymentMethod} onIonChange={e => setPaymentMethod(e.detail.value)}>
+            <IonItem>
+              <IonIcon icon={cashOutline} slot="start" />
+              <IonLabel>Efectivo</IonLabel>
+              <IonRadio value="efectivo" />
+            </IonItem>
+            <IonItem>
+              <IonIcon icon={cardOutline} slot="start" />
+              <IonLabel>Tarjeta de Crédito/Débito</IonLabel>
+              <IonRadio value="tarjeta" />
+            </IonItem>
+          </IonRadioGroup>
+        </IonList>
         
         <div className="ion-padding ion-text-end">
           <IonText color="dark">
             <h2>Total: ${totalPrice.toFixed(2)}</h2>
           </IonText>
           
-          <IonButton expand="block" onClick={onStartOrder}>
+          <IonButton expand="block" onClick={() => onStartOrder(paymentMethod)}>
             Iniciar Orden
           </IonButton>
         </div>

@@ -111,7 +111,7 @@ const EstablishmentDetail: React.FC = () => {
     return cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
   };
 
-  const handleStartOrder = async () => {
+  const handleStartOrder = async (paymentMethod: string) => {
     if (!auth.currentUser) {
       history.push('/login?redirect=/establishment/' + id);
       return;
@@ -128,12 +128,13 @@ const EstablishmentDetail: React.FC = () => {
         status: OrderStatus.PENDING,
         totalAmount: calculateTotal(),
         createdAt: new Date(),
+        paymentMethod: paymentMethod
       };
 
       const orderRef = await addDoc(collection(db, 'orders'), newOrder);
       
       // Redireccionar a la página de confirmación de la orden
-      history.push(`/orders/${orderRef.id}`);
+      history.push(`/app/`);
       
       // Limpiar el carrito
       setCartItems([]);

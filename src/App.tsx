@@ -54,6 +54,7 @@ import Home from './pages/Home';
 import Orders from './pages/Orders';
 import OrderDetail from './pages/OrderDetail';
 import ScreenSplash from './pages/ScreenSplash';
+import AdminDashboard from './pages/Admin/dashboard';
 
 setupIonicReact();
 
@@ -102,6 +103,7 @@ const App: React.FC = () => (
         </Route>
         <Route exact path="/establishment/:id" component={EstablishmentDetail} />
         <PrivateRoute path="/app/establishment" component={TabsLayoutEstablishmnet} />
+        <PrivateRoute path="/admin" component={AdminDashboard} />
 
 
     </IonReactRouter>

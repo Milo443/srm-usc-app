@@ -44,6 +44,9 @@ const OrdersListEstablishment: React.FC<OrdersListProps> = ({
                 {formatDate(order.createdAt)}
               </p>
               <p>
+                <strong>Método de pago:</strong> {order.paymentMethod === 'efectivo' ? 'Efectivo' : 'Tarjeta'}
+              </p>
+              <p>
                 <strong>Total:</strong> ${order.totalAmount.toFixed(2)} •
                 <strong> Items:</strong> {order.items.reduce((sum, item) => sum + item.quantity, 0)}
               </p>

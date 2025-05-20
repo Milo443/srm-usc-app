@@ -136,6 +136,7 @@ const Orders: React.FC = () => {
             items: data.items || [],
             status: data.status || OrderStatus.PENDING,
             totalAmount: data.totalAmount || 0,
+            paymentMethod: data.paymentMethod || "Efectivo",
             createdAt: createdAt,
             ...(data.updatedAt && { updatedAt: data.updatedAt instanceof Timestamp ? data.updatedAt.toDate() : new Date(data.updatedAt) })
           };
@@ -417,7 +418,8 @@ const Orders: React.FC = () => {
           <IonList>
             {filteredOrders.map(order => (
               <IonItemSliding key={order.id}>
-                <IonItem button onClick={() => viewOrderDetail(order.id!)}>
+                {/*<IonItem button onClick={() => viewOrderDetail(order.id!)}>*/}
+                <IonItem>
                   <IonLabel>
                     <h2>{order.establishmentName}</h2>
                     <p>
@@ -425,6 +427,10 @@ const Orders: React.FC = () => {
                       {formatDate(order.createdAt)}
                     </p>
                     <p>
+                      <strong>Método de pago:</strong> {order.paymentMethod === 'efectivo' ? 'Efectivo' : 'Tarjeta'}
+                    </p>
+                    <p>
+                      
                       <strong>Total:</strong> ${order.totalAmount.toFixed(2)} • 
                       <strong> Items:</strong> {order.items.reduce((sum, item) => sum + item.quantity, 0)}
                     </p>
@@ -439,11 +445,7 @@ const Orders: React.FC = () => {
                     {getStatusText(order.status)}
                   </IonBadge>
                 </IonItem>
-                <IonItemOptions side="end">
-                  <IonItemOption onClick={() => viewOrderDetail(order.id!)}>
-                    Ver detalles
-                  </IonItemOption>
-                </IonItemOptions>
+                
               </IonItemSliding>
             ))}
           </IonList>

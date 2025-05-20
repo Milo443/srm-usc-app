@@ -12,6 +12,7 @@ interface Order {
   total: number;
   status: 'pending' | 'confirmed' | 'completed' | 'cancelled';
   date: string;
+  paymentMethod: string;
 }
 
 interface Props {
@@ -67,6 +68,9 @@ const OrderListComponent: React.FC<Props> = ({ orders }) => {
                 <span>${item.price.toFixed(2)}</span>
               </div>
             ))}
+            <div className="order-payment">
+              <span>Método de pago: {order.paymentMethod === 'efectivo' ? 'Efectivo' : 'Tarjeta'}</span>
+            </div>
             <div className="order-total">
               <strong>Total: ${order.total.toFixed(2)}</strong>
             </div>
